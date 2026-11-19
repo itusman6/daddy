@@ -1,0 +1,14 @@
+{
+  "name": "daddylive-stream-resolver",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/prebuild.mjs && node scripts/build.mjs",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
+    "start": "node scripts/start.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "tsx": "^4.20.4",
+    "typescript": "^5.9.2"
+  }
+}
