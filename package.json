@@ -2,9 +2,11 @@
   "name": "daddylive-stream-resolver",
   "type": "module",
   "scripts": {
-    "build": "node scripts/prebuild.mjs && node scripts/build.mjs",
-    "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
-    "start": "node scripts/start.mjs"
+    "clean": "node --input-type=module -e \"import fs from 'node:fs'; fs.rmSync('dist', { recursive: true, force: true });\"",
+    "build": "npm run clean && tsc && node --input-type=module -e \"import fs from 'node:fs'; fs.mkdirSync('dist/web', { recursive: true }); fs.copyFileSync('src/web/style.css', 'dist/web/style.css');\"",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsx watch src/api/index.ts",
+    "start": "node dist/api/index.js"
   },
   "devDependencies": {
     "@types/node": "^24.3.0",
