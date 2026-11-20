@@ -1,0 +1,12 @@
+const IFRAME_RE = /<iframe[^>]+id="thatframe"[^>]+src="([^"]+)"|<iframe[^>]+src="([^"]+)"[^>]+id="thatframe"/i;
+const VIDEO_IFRAME_RE = /<iframe[^>]+class="[^"]*video[^"]*"[^>]+src="([^"]+)"|<iframe[^>]+src="([^"]+)"[^>]+class="[^"]*video[^"]*"/gi;
+export function extractEmbedUrl(html) {
+    const match = html.match(IFRAME_RE);
+    if (match)
+        return match[1] ?? match[2] ?? null;
+    const videos = [...html.matchAll(VIDEO_IFRAME_RE)];
+    if (!videos.length)
+        return null;
+    const last = videos[videos.length - 1];
+    return last[1] ?? last[2] ?? null;
+}
